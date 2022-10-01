@@ -1,9 +1,12 @@
 import React from 'react'
+import Layout from '../Layout'
 
 const Clientes = () => {
   return (
     <div>
-        <p>Clientes</p>
+        <Layout>
+            <p>Clientes</p>
+        </Layout>
     </div>
   )
 }
