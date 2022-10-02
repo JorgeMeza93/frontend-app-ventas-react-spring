@@ -2,10 +2,20 @@ import React from 'react'
 
 const RowTablaCliente = ( {cliente} ) => {
     const {nombre, apellidos, direccion, telefono, email} = cliente;
+    const modificarCliente = () => {
+        console.log("Modificando cliente");
+    }
+    const eliminarCliente = () => {
+        console.log("Eliminando cliente");
+    }
     return (
     <tr>
         <td>
-            <button className='button is-small is-info mr-1' title='Modificar'>
+            <button 
+                className='button is-small is-info mr-1' 
+                title='Modificar'
+                onClick={ () => modificarCliente() }
+                >
                 <span className='icon is-email'>
                     <i className='fas fa-edit'></i>
                 </span>
