@@ -12,10 +12,10 @@ const Layout = (props) => {
                     <Menu/>
                 </div>
                 <div className='column'>
-                    <p>{props.children}</p>
+                    <div>{props.children}</div>
                 </div>
             </div>
-        </div>
+        </div> 
     </div>
   )
 }
