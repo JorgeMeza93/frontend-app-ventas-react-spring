@@ -1,6 +1,8 @@
 import React from 'react'
 import Tabla from '../clientes/Tabla'
+import ToolbarCliente from '../clientes/ToolbarCliente'
 import Layout from '../Layout'
+import Modal from './Modal'
 
 const Clientes = () => {
   return (
@@ -10,16 +12,10 @@ const Clientes = () => {
                 Clientes
             </div>
             <div className="box">
-                <div className="container">
-                    <button className='button is-small is-primary'>
-                        <span className='icon is-email'>
-                            <i className='fas fa-plus'></i>
-                        </span>
-                        <span>Registar Nuevo</span>
-                    </button>
-                </div>
+               <ToolbarCliente/>
+                <Tabla/>
             </div>
-            <Tabla/>
+            <Modal/>
         </Layout>
     </div>
   )
