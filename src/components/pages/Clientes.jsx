@@ -1,4 +1,5 @@
 import React from 'react'
+import FormularioCliente from '../clientes/FormularioCliente'
 import Tabla from '../clientes/Tabla'
 import ToolbarCliente from '../clientes/ToolbarCliente'
 import Layout from '../Layout'
@@ -15,7 +16,9 @@ const Clientes = () => {
                <ToolbarCliente/>
                 <Tabla/>
             </div>
-            <Modal/>
+            <Modal>
+              <FormularioCliente/>
+            </Modal>
         </Layout>
     </div>
   )
