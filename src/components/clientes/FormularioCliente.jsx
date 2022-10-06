@@ -27,7 +27,8 @@ const FormularioCliente = () => {
       setMensaje("Nombre, apellido y email son campos obligatorios");
       return;
     }
-    limpiarForm();
+    console.log(obtenerClienteAEnviar());
+    cerrarModal();
   }
   const cerrarModal = () => {
     limpiarForm();
@@ -36,6 +37,12 @@ const FormularioCliente = () => {
   const limpiarForm = () => {
     setMensaje(null);
     setCliente(clienteDefault);
+  }
+  const obtenerClienteAEnviar = () => {
+    let clienteTemp = {...cliente};
+    if(clienteTemp.direccion === "" ) delete clienteTemp.direccion;
+    if(clienteTemp.direccion === "" ) delete clienteTemp.telefono;
+    return clienteTemp;
   }
   return (
     <form onSubmit={handleOnSubmit}>
