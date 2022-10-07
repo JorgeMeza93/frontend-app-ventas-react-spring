@@ -1,26 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import RowTablaCliente from './RowTablaCliente';
+import { ClienteContext } from "../context/ClienteContext"
 
 const Tabla = () => {
-  const [clientesList, setClientesList] = useState([
-    {
-        "idCliente": 1,
-        "nombre": "Jorge",
-        "apellido": "Meza",
-        "direccion": "Calle Samuel Goldstein 546, col Verde Valle",
-        "telefono": "2225169936",
-        "email": "jorge-riverplate.com"
-    },
-    {
-        "idCliente": 2,
-        "nombre": "James",
-        "apellido": "McGill",
-        "direccion": "Calle Broadway 234, Saint Michael",
-        "telefono": "2220200181",
-        "email": "jimmy-mcgill@yahoo.com"
-    }
-  ]);
-
+  const { clienteList, obtenerClientes } = useContext(ClienteContext);
+  useEffect( () => {
+    obtenerClientes();
+  }, []);
+  if( clienteList.length === 0){
+    return (
+        <center><p>No existen clientes</p></center>
+    )
+  }
   return (
     <div className='table-container'>
         <table className='table is-hoverable'>
@@ -36,7 +27,7 @@ const Tabla = () => {
             </thead>
             <tbody>
                 {
-                    clientesList.map( cliente => {
+                    clienteList.map( cliente => {
                         return (
                             <RowTablaCliente 
                             cliente={cliente} 
