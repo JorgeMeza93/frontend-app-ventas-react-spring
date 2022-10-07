@@ -1,4 +1,4 @@
-import { OBTENER_CLIENTES, REGISTRAR_CLIENTE } from "../../const/actionTypes";
+import { OBTENER_CLIENTE, OBTENER_CLIENTES, REGISTRAR_CLIENTE } from "../../const/actionTypes";
 
 export default (state, action) => {
     switch (action.type) {
@@ -10,7 +10,12 @@ export default (state, action) => {
         case REGISTRAR_CLIENTE:
             return {
                 ...state,
-                clienteList: [...state.clienteList, action.payload]
+                clienteList: [action.payload, ...state.clienteList]
+            }
+        case OBTENER_CLIENTE: 
+            return {
+                ...state,
+                clienteActual: action.payload
             }
         default:
             return state;
