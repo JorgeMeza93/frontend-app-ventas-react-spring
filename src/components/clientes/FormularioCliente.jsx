@@ -1,9 +1,11 @@
 import React from 'react';
 import { useState, useContext } from 'react';
+import { ClienteContext } from '../context/ClienteContext';
 import { ModalContext } from '../context/ModalContext';
 
 const FormularioCliente = () => {
   const { setShowModal} = useContext(ModalContext);
+  const { registarCliente } = useContext(ClienteContext)
   const clienteDefault = {
     nombres: "",
     apellido: "",
@@ -27,7 +29,7 @@ const FormularioCliente = () => {
       setMensaje("Nombre, apellido y email son campos obligatorios");
       return;
     }
-    console.log(obtenerClienteAEnviar());
+    registarCliente(obtenerClienteAEnviar());
     cerrarModal();
   }
   const cerrarModal = () => {

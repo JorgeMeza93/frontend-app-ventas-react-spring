@@ -4,7 +4,7 @@ import { ModalContext } from '../context/ModalContext';
 
 const RowTablaCliente = ( {cliente} ) => {
     const { showModal, modalTitle, setModalTitle, setShowModal} = useContext(ModalContext);
-    const {nombre, apellidos, direccion, telefono, email} = cliente;
+    const {nombres, apellido, direccion, telefono, email, idCliente} = cliente;
     const abrirModificarCliente = () => {
         setModalTitle("Modificar cliente");
         setShowModal(true);
@@ -30,8 +30,8 @@ const RowTablaCliente = ( {cliente} ) => {
                 </span>
             </button>
         </td>
-        <td>{nombre}</td>
-        <td>{apellidos}</td>
+        <td>{nombres}</td>
+        <td>{apellido}</td>
         <td>{direccion}</td>
         <td>{telefono}</td>
         <td>{email}</td>

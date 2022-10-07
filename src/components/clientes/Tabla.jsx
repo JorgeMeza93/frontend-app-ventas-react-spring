@@ -4,6 +4,7 @@ import { ClienteContext } from "../context/ClienteContext"
 
 const Tabla = () => {
   const { clienteList, obtenerClientes } = useContext(ClienteContext);
+
   useEffect( () => {
     obtenerClientes();
   }, []);
