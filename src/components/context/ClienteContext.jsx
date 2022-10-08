@@ -2,6 +2,7 @@ import React, { createContext, useReducer } from 'react'
 import ClienteReducer from '../reducer/ClienteReducer';
 import { ELIMINAR_CLIENTE, MODIFICAR_CLIENTE, OBTENER_CLIENTE, OBTENER_CLIENTES, REGISTRAR_CLIENTE } from '../../const/actionTypes';
 import { v4 as uuidv4 } from 'uuid';
+import Axios from 'axios';
 
 export  const ClienteContext = createContext();
 export const ClienteContextProvider = props => {
@@ -10,7 +11,9 @@ export const ClienteContextProvider = props => {
         clienteActual: null
     }
     const [state, dispatch] = useReducer(ClienteReducer, initialState);
-    const obtenerClientes = () => {
+    const obtenerClientes = async () => {
+        Axios.get("http://localhost:8080/api/clientes")
+        
         const clientes = [
            
         ]
