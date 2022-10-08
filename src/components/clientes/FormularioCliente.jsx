@@ -5,7 +5,7 @@ import { ModalContext } from '../context/ModalContext';
 
 const FormularioCliente = () => {
   const { setShowModal} = useContext(ModalContext);
-  const { registarCliente, clienteActual } = useContext(ClienteContext)
+  const { registarCliente, clienteActual, obtenerCliente, actualizarCliente } = useContext(ClienteContext)
   const clienteDefault = {
     nombres: "",
     apellido: "",
@@ -19,8 +19,8 @@ const FormularioCliente = () => {
     if(clienteActual !== null){
       setCliente({
         ...clienteActual,
-        direccion: clienteActual.direccion !== null ? clienteActual.direccion : "",
-        telefono: clienteActual.telefono !== null ? clienteActual.telefono : ""
+        direccion: clienteActual.direccion  ? clienteActual.direccion : "",
+        telefono: clienteActual.telefono ? clienteActual.telefono : ""
       })
     }
     else{
@@ -43,12 +43,18 @@ const FormularioCliente = () => {
       setMensaje("Nombre, apellido y email son campos obligatorios");
       return;
     }
-    registarCliente(obtenerClienteAEnviar());
+    if(clienteActual !== null){
+      actualizarCliente(obtenerClienteAEnviar)
+    }
+    else{
+      registarCliente(obtenerClienteAEnviar());
+    }
     cerrarModal();
   }
   const cerrarModal = () => {
     limpiarForm();
     setShowModal(false);
+    obtenerCliente(null);
   }
   const limpiarForm = () => {
     setMensaje(null);
