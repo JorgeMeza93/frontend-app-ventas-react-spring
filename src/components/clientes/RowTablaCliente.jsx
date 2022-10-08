@@ -5,7 +5,7 @@ import { ModalContext } from '../context/ModalContext';
 
 const RowTablaCliente = ( {cliente} ) => {
     const { setModalTitle, setShowModal} = useContext(ModalContext);
-    const { obtenerCliente } = useContext(ClienteContext)
+    const { obtenerCliente, eliminarCliente } = useContext(ClienteContext)
     
     const {nombres, apellido, direccion, telefono, email, idCliente} = cliente;
     
@@ -15,9 +15,7 @@ const RowTablaCliente = ( {cliente} ) => {
         setModalTitle("Modificar cliente");
         setShowModal(true);
     }
-    const eliminarCliente = () => {
-        console.log("Eliminando cliente");
-    }
+   
     return (
     <tr>
         <td>
@@ -30,7 +28,10 @@ const RowTablaCliente = ( {cliente} ) => {
                     <i className='fas fa-edit'></i>
                 </span>
             </button>
-            <button className='button is-small is-danger' title='Eliminar'>
+            <button className='button is-small is-danger' 
+                title='Eliminar'
+                onClick={ () => eliminarCliente(idCliente)}
+            >
                 <span className='icon is-email'>
                     <i className='fas fa-trash-alt'></i>
                 </span>
