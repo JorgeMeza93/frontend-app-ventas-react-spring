@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState, useContext } from 'react';
 import { ClienteContext } from '../context/ClienteContext';
 import { ModalContext } from '../context/ModalContext';
 
 const FormularioCliente = () => {
   const { setShowModal} = useContext(ModalContext);
-  const { registarCliente } = useContext(ClienteContext)
+  const { registarCliente, clienteActual } = useContext(ClienteContext)
   const clienteDefault = {
     nombres: "",
     apellido: "",
@@ -15,6 +15,20 @@ const FormularioCliente = () => {
   }
   const [cliente, setCliente] = useState(clienteDefault);
   const [mensaje, setMensaje] = useState(null);
+  useEffect( () => {
+    if(clienteActual !== null){
+      setCliente({
+        ...clienteActual,
+        direccion: clienteActual.direccion !== null ? clienteActual.direccion : "",
+        telefono: clienteActual.telefono !== null ? clienteActual.telefono : ""
+      })
+    }
+    else{
+      setCliente(clienteDefault);
+    }
+  }, [clienteActual])
+
+
   const handleChange = e => {
       setCliente({
         ...cliente,

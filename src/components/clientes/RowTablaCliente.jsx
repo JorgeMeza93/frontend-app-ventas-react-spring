@@ -1,11 +1,17 @@
 import React from 'react'
 import { useContext } from 'react';
+import { ClienteContext } from '../context/ClienteContext';
 import { ModalContext } from '../context/ModalContext';
 
 const RowTablaCliente = ( {cliente} ) => {
-    const { showModal, modalTitle, setModalTitle, setShowModal} = useContext(ModalContext);
+    const { setModalTitle, setShowModal} = useContext(ModalContext);
+    const { obtenerCliente } = useContext(ClienteContext)
+    
     const {nombres, apellido, direccion, telefono, email, idCliente} = cliente;
+    
+    
     const abrirModificarCliente = () => {
+        obtenerCliente(cliente);
         setModalTitle("Modificar cliente");
         setShowModal(true);
     }
