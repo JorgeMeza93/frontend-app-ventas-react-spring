@@ -12,34 +12,48 @@ export const ClienteContextProvider = props => {
     }
     const [state, dispatch] = useReducer(ClienteReducer, initialState);
     const obtenerClientes = async () => {
-        Axios.get("http://localhost:8080/api/clientes")
-        
-        const clientes = [
-           
-        ]
-        dispatch({
+        try {
+            const resultado = await Axios.get("/clientes")
+            dispatch({
             type: OBTENER_CLIENTES,
-            payload: clientes
-        })
-    }
-
-    const registarCliente = (cliente) => {
-        let clienteNuevo = {
-            ...cliente,
-            idCLiente: uuidv4()
+            payload: resultado.data
+            })
+        } catch (error) {
+            console.log(error);
         }
-        console.log(clienteNuevo)
-        dispatch({
-            type: REGISTRAR_CLIENTE,
-            payload: clienteNuevo
-        })
     }
 
-    const obtenerCliente = (cliente) => {
-        dispatch({
-            type: OBTENER_CLIENTE,
-            payload: cliente
-        })
+    const registarCliente = async (cliente) => {
+        try {
+            const resultado = await Axios.post("/clientes", cliente);
+            dispatch({
+                type: REGISTRAR_CLIENTE,
+                payload: resultado.data
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const obtenerCliente = async (cliente) => {
+        
+        try {
+            let clienteEncontrado = null
+            if(cliente === null){
+                const resultado = await Axios.get(`/clientes/${cliente.idCliente}`, cliente);
+                clienteEncontrado = resultado.data
+            }
+            else{
+                clienteEncontrado = cliente;
+            }
+            dispatch({
+                type: OBTENER_CLIENTE,
+                payload: clienteEncontrado
+            })
+        } catch (error) {
+            console.log(error);
+        }
+       
     }
     const actualizarCliente = cliente => {
         dispatch({

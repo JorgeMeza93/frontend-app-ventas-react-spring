@@ -4,7 +4,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./components/pages/Home";
 import Clientes from "./components/pages/Clientes";
-import { ModalContextProvider } from "./components/context/ModalContext"
+import { ModalContextProvider } from "./components/context/ModalContext";
+import  Axios  from "axios";
+
+Axios.interceptors.request.use(function(config){
+  config.url = "http://localhost:8080/api" + `${config.url}`
+  return config;
+})
 
 function App() {
   return (
