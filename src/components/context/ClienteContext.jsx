@@ -3,6 +3,7 @@ import ClienteReducer from '../reducer/ClienteReducer';
 import { ELIMINAR_CLIENTE, MODIFICAR_CLIENTE, OBTENER_CLIENTE, OBTENER_CLIENTES, REGISTRAR_CLIENTE } from '../../const/actionTypes';
 import { v4 as uuidv4 } from 'uuid';
 import Axios from 'axios';
+import Swal from 'sweetalert2';
 
 export  const ClienteContext = createContext();
 export const ClienteContextProvider = props => {
@@ -19,6 +20,12 @@ export const ClienteContextProvider = props => {
             payload: resultado.data
             })
         } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Error ocurrido",
+                text: "No se pudo obtener los clientes",
+                toast: true
+            });
             console.log(error);
         }
     }
