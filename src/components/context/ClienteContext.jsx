@@ -55,17 +55,28 @@ export const ClienteContextProvider = props => {
         }
        
     }
-    const actualizarCliente = cliente => {
-        dispatch({
-            type: MODIFICAR_CLIENTE,
-            payload: cliente
-        })
+    const actualizarCliente = async cliente => {
+        const resultado = await Axios.put("/clientes", cliente);
+        try {
+            dispatch({
+                type: MODIFICAR_CLIENTE,
+                payload: resultado.dataM
+            })
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
-    const eliminarCliente = idCliente => {
-        dispatch(
-            { type: ELIMINAR_CLIENTE,
-            payload: idCliente
+    const eliminarCliente = async idCliente => {
+       try {
+            await Axios.delete(`/clientes/${idCliente}`);
+            dispatch(
+                { type: ELIMINAR_CLIENTE,
+                payload: idCliente
         })
+       } catch (error) {
+            console.log(error)
+       }
     }
     return (
         <ClienteContext.Provider
